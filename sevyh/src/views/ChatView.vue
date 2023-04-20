@@ -2,6 +2,7 @@
 import { defineComponent } from "vue";
 import HeaderComponent from "@/components/layout/HeaderComponent.vue";
 import ChatHistoryComponent from "@/components/chat/ChatHistoryComponent.vue";
+import ChatMessageInputComponent from "@/components/chat/ChatMessageInputComponent.vue";
 
 interface Message {
   user: string;
@@ -12,7 +13,8 @@ export default defineComponent({
   name: "YourComponent",
   components: {
     ChatHistoryComponent,
-    HeaderComponent
+    ChatMessageInputComponent,
+    HeaderComponent,
   },
   data() {
     return {
@@ -29,11 +31,12 @@ export default defineComponent({
 
 <template>
     <HeaderComponent />
-  <main class="container mt-2">
+    <main class="container mt-2">
     <div class="row">
-      <div class="col-md-8 offset-md-2">
+        <div class="col-md-8 offset-md-2">
         <ChatHistoryComponent :messages="chatMessages" />
-      </div>
+        <ChatMessageInputComponent />
+        </div>
     </div>
-  </main>
+    </main>
 </template>
