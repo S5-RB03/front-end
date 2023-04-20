@@ -1,9 +1,39 @@
-<script setup lang="ts">
+<script lang="ts">
+import { defineComponent } from "vue";
+import HeaderComponent from "@/components/layout/HeaderComponent.vue";
+import ChatHistoryComponent from "@/components/chat/ChatHistoryComponent.vue";
 
+interface Message {
+  user: string;
+  text: string;
+}
+
+export default defineComponent({
+  name: "YourComponent",
+  components: {
+    ChatHistoryComponent,
+    HeaderComponent
+  },
+  data() {
+    return {
+      chatMessages: [
+        { user: "User 1", text: "Hello!" },
+        { user: "User 2", text: "Hi, how are you?" },
+        { user: "User 1", text: "I'm doing well, thank you." },
+        { user: "User 2", text: "That's great to hear!" },
+      ] as Message[],
+    };
+  },
+});
 </script>
 
 <template>
-  <main>
-    <h1>Chat</h1>
+    <HeaderComponent />
+  <main class="container mt-2">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <ChatHistoryComponent :messages="chatMessages" />
+      </div>
+    </div>
   </main>
 </template>
