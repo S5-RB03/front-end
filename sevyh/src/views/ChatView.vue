@@ -3,6 +3,7 @@
 </script>
 
 <template>
-  <router-view></router-view>
+  <main>
+    <h1>Chat</h1>
+  </main>
 </template>
-
