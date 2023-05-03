@@ -10,8 +10,9 @@
             :key="index"
             class="list-group-item"
           >
-            <strong>{{ message.senderId }}:</strong> {{ message.textContent }}
+            <strong v-text="message.senderId + ':'"></strong> <span v-text="message.textContent"></span>
           </li>
+
         </ul>
       </div>
     </div>
@@ -19,7 +20,7 @@
   
   <script lang="ts">
   import { defineComponent, ref, onMounted, watch } from "vue";
-  import { Message } from "@/interfaces/Message";
+  import type { Message } from "@/interfaces/Message";
   
   export default defineComponent({
     name: "ChatHistory",
@@ -49,8 +50,11 @@
         try {
           const response = await fetch(apiUrl);
           if (response.ok) {
-            console.log("response", response);
-            chatMessages.value = await response.json();
+            //console.log("response", response);
+            const jsonResponse = await response.json();
+            chatMessages.value = jsonResponse.data;
+
+            console.log("chatMessages.value", chatMessages.value);
           } else {
             console.error("Failed to fetch messages:", await response.text());
           }
@@ -61,7 +65,8 @@
   
       onMounted(fetchMessages);
       watch(() => [props.senderId, props.receiverId, props.page, props.pageSize], fetchMessages);
-  
+      
+
       return { chatMessages };
     },
   });

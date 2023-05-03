@@ -13,8 +13,8 @@ export default defineComponent({
   },
   data() {
     return {
-      senderId: "5f02ed77-dba5-41ff-ae8b-61d4f9d58d98",
-      receiverId: "2eb21682-586c-4fd6-8152-8624f93d7db5",
+      senderId: "2eb21682-586c-4fd6-8152-8624f93d7db5",
+      receiverId:  "5f02ed77-dba5-41ff-ae8b-61d4f9d58d98",
     };
   },
 });
@@ -26,7 +26,7 @@ export default defineComponent({
     <div class="row">
       <div class="col-md-8 offset-md-2">
         <ChatHistoryComponent :senderId="senderId" :receiverId="receiverId" />
-        <ChatMessageInputComponent />
+        <ChatMessageInputComponent :senderId="senderId" :receiverId="receiverId"/>
       </div>
     </div>
   </main>

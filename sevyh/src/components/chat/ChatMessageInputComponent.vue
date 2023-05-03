@@ -1,10 +1,21 @@
 <script lang="ts">
-import { defineComponent, ref } from "vue";
-import { Message, MessageType } from "../../interfaces/Message";
+import { defineComponent, mergeProps, ref } from "vue";
+import type { Message } from "../../interfaces/Message";
+import { MessageType } from "@/interfaces/Message";
 
 export default defineComponent({
   name: "MessageInput",
-  setup() {
+  props: {
+    senderId: {
+      type: String,
+      required: true,
+    },
+    receiverId: {
+      type: String,
+      required: true,
+    },
+  },
+  setup(props) {
     const messageText = ref("");
 
     async function sendMessage() {
@@ -14,8 +25,8 @@ export default defineComponent({
 
       const messageData: Message = {
         textContent: messageText.value,
-        senderId: "9f98b59b-cd36-4243-aad1-6ba3cd6e4fc0", 
-        receiverId: "b4e229c4-fa16-492d-8890-a577dca9d6b5",
+        senderId: props.senderId, 
+        receiverId: props.receiverId,
         timestamp: new Date().toISOString(),
         messageType: MessageType.TEXT,
       };
