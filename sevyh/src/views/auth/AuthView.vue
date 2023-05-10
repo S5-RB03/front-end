@@ -10,6 +10,9 @@
   import { defineComponent } from 'vue';
   
   export default defineComponent({
+    mounted() {
+      console.log('Keycloak:', this.$keycloak);
+    },
     methods: {
       login() {
         this.$keycloak.login();
