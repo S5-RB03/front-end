@@ -1,13 +1,22 @@
 <template>
     <ul>
         <li v-for="user in users" :key="user.uuid">
-            {{ user.uuid }}
+            <button @click="setReceiverId(user.uuid)">{{ user.uuid }}</button>
         </li>
     </ul>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
+import { useReceiverStore } from '@/stores/receiverStore';
+import router from '@/router';
+
+const receiverStore = useReceiverStore();
+
+const setReceiverId = (uuid: string) => {
+    receiverStore.setReceiverId(uuid);
+    router.push({ name: 'chat' });
+}
 
 type User = {
     uuid: string;
