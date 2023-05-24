@@ -12,7 +12,6 @@ import router from './router';
 import './assets/main.scss';
 import keycloakPlugin from './plugins/keycloak';
 import keycloak from './keycloak';
-import type { KeycloakInitOptions } from 'keycloak-js';
 
 
   const app = createApp(App);

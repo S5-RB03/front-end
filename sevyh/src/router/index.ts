@@ -13,7 +13,8 @@ const router = createRouter({
     {
       path: '/chat',
       name: 'chat',
-      component: ChatView
+      component: ChatView,
+      props: true
     }
   ]
 })

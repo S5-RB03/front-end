@@ -1,4 +1,3 @@
-// src/keycloak.ts
 import Keycloak from 'keycloak-js';
 import type { KeycloakConfig } from 'keycloak-js';
 

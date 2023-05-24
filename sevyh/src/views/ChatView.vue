@@ -1,23 +1,25 @@
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import HeaderComponent from "@/components/layout/HeaderComponent.vue";
 import ChatHistoryComponent from "@/components/chat/ChatHistoryComponent.vue";
 import ChatMessageInputComponent from "@/components/chat/ChatMessageInputComponent.vue";
+import keycloak from '@/keycloak'
+import { useReceiverStore } from '@/stores/receiverStore';
+import { watchEffect, ref } from 'vue';
 
-export default defineComponent({
-  name: "YourComponent",
-  components: {
-    HeaderComponent,
-    ChatHistoryComponent,
-    ChatMessageInputComponent,
-  },
-  data() {
-    return {
-      senderId: "2eb21682-586c-4fd6-8152-8624f93d7db5",
-      receiverId:  "5f02ed77-dba5-41ff-ae8b-61d4f9d58d98",
-    };
-  },
+const receiverStore = useReceiverStore();
+const receiverId = ref<string>(receiverStore.receiverId);
+const senderId = ref<string>(keycloak.subject || "")
+
+watchEffect(() => {
+  // If Keycloak's authentication state changes, update the sender ID.
+  if (keycloak.authenticated) {
+    senderId.value = keycloak.tokenParsed?.sub || '';
+    console.log('senderId.value:', senderId.value);
+  } else {
+    senderId.value = '';
+  }
 });
+
 </script>
 
 <template>
