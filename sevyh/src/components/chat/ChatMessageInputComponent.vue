@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, mergeProps, ref } from "vue";
+import { defineComponent, ref } from "vue";
 import type { Message } from "../../interfaces/Message";
 import { MessageType } from "@/interfaces/Message";
 
