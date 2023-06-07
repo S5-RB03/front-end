@@ -2,7 +2,7 @@ import Keycloak from 'keycloak-js';
 import type { KeycloakConfig } from 'keycloak-js';
 
 const keycloakConfig: KeycloakConfig ={
-  url: 'http://localhost:8080/auth',
+  url: import.meta.env.VITE_KEYCLOAK_URL as string,
   realm: 'SevyhAuth',
   clientId: 'front-end-client',
 };
