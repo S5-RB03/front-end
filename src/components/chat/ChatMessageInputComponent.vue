@@ -1,59 +1,57 @@
-<script lang="ts">
-import { defineComponent, ref } from "vue";
+<script setup lang="ts">
+import { ref } from "vue";
 import type { Message } from "../../interfaces/Message";
 import { MessageType } from "@/interfaces/Message";
+import { defineProps } from 'vue'
 
-export default defineComponent({
-  name: "MessageInput",
-  props: {
-    senderId: {
-      type: String,
-      required: true,
-    },
-    receiverId: {
-      type: String,
-      required: true,
-    },
+const apiUrl = import.meta.env.VITE_API_URL;
+
+const props = defineProps({
+  senderId: {
+    type: String,
+    required: true,
   },
-  setup(props) {
-    const messageText = ref("");
+  receiverId: {
+    type: String,
+    required: true,
+  },
+})
 
-    async function sendMessage() {
-      if (messageText.value.trim() === "") return;
+const messageText = ref("");
 
-      const apiUrl = "http://localhost:3001/api/v1/chat/message";
+async function sendMessage() {
+  if (messageText.value.trim() === "") return;
 
-      const messageData: Message = {
-        textContent: messageText.value,
-        senderId: props.senderId, 
-        receiverId: props.receiverId,
-        timestamp: new Date().toISOString(),
-        messageType: MessageType.TEXT,
-      };
+  const messageId = `${props.senderId}-${new Date().toISOString()}-${Math.random().toString(36).substring(2)}`
 
-      try {
-        const response = await fetch(apiUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(messageData),
-        });
+  const messageData: Message = {
+    id: messageId,
+    textContent: messageText.value,
+    senderId: props.senderId,
+    receiverId: props.receiverId,
+    messageType: MessageType.TEXT,
+  };
 
-        if (response.ok) {
-          messageText.value = "";
-        } else {
-          console.error("Failed to send message:", await response.text());
-        }
-      } catch (error) {
-        console.error("Error sending message:", error);
-      }
+  try {
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(messageData),
+    });
+
+    if (response.ok) {
+      messageText.value = "";
+    } else {
+      console.error("Failed to send message:", await response.text());
     }
-
-    return { messageText, sendMessage };
-  },
-});
+  } catch (error) {
+    console.error("Error sending message:", error);
+  }
+}
 </script>
+
 
 <template>
     <div class="message-input">
