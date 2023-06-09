@@ -12,6 +12,7 @@ import router from './router';
 
 import keycloakPlugin from './plugins/keycloak';
 
+
 const app = createApp(App);
 const pinia = createPinia();
 
@@ -22,9 +23,10 @@ app.use(keycloakPlugin);
 import { useKeycloakStore } from '@/stores/keycloakStore';
 const store = useKeycloakStore();
 
-console.log('VITE_KEYCLOAK_URL', import.meta.env.VITE_KEYCLOAK_URL);
-console.log('VITE_USERSERVICE_URL', import.meta.env.VITE_USERSERVICE_URL);
-console.log('VITE_CHATSERVICE_URL', import.meta.env.VITE_CHATSERVICE_URL);
+console.log('VITE_KEYCLOAK_URL', (window as any).env.VITE_KEYCLOAK_URL);
+console.log('VITE_USERSERVICE_URL', (window as any).env.VITE_USERSERVICE_URL);
+console.log('VITE_CHATSERVICE_URL', (window as any).env.VITE_CHATSERVICE_URL);
+
 
 app.mount('#app');
 
