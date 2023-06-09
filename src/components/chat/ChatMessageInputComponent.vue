@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import getEnvironmentVariable from '../../../env';
 import { ref } from "vue";
 import type { Message } from "../../interfaces/Message";
 import { MessageType } from "@/interfaces/Message";
 import { defineProps } from 'vue'
 
-const apiUrl = import.meta.env.VITE_CHATSERVICE_URL as string + "/v1/chat/message";
+const apiUrl = getEnvironmentVariable('VITE_CHATSERVICE_URL') as string + "/v1/chat/message";
 
 const props = defineProps({
   senderId: {
