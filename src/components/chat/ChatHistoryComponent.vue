@@ -46,7 +46,7 @@
       const chatMessages = ref<Message[]>([]);
   
       async function fetchMessages() {
-        const apiUrl = `http://localhost:3001/api/v1/chat/message?senderId=${props.senderId}&receiverId=${props.receiverId}&page=${props.page}&pageSize=${props.pageSize}`;
+        const apiUrl = import.meta.env.VITE_CHATSERVICE_URL as String + `/v1/chat/message?senderId=${props.senderId}&receiverId=${props.receiverId}&page=${props.page}&pageSize=${props.pageSize}`;
         try {
           const response = await fetch(apiUrl);
           if (response.ok) {
