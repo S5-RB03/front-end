@@ -56,12 +56,11 @@ const fetchData = async () => {
             retryCount.value += 1;
             startRetryTimer();
         } else {
-            hasError.value = true;
+            isLoading.value = false;
         }
-    } finally {
-        isLoading.value = false;
     }
 };
+
 
 const startRetryTimer = () => {
     retryTimer.value = 5;
