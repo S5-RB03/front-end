@@ -1,5 +1,5 @@
 {
-  "files": [],
+  "files": ["env.d.ts"],
   "references": [
     {
       "path": "./tsconfig.node.json"
@@ -16,8 +16,11 @@
     "paths": {
       "@/*": ["./src/*"]
     },
+    "verbatimModuleSyntax": true,
     // other compiler options...
   },
-  "exclude": ["node_modules"]
-  
+  "exclude": ["node_modules"],
+  "include": [
+    "env.d.ts",
+  ]
 }
