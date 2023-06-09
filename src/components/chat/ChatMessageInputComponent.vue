@@ -4,7 +4,7 @@ import type { Message } from "../../interfaces/Message";
 import { MessageType } from "@/interfaces/Message";
 import { defineProps } from 'vue'
 
-const apiUrl = import.meta.env.VITE_API_URL as string;
+const apiUrl = import.meta.env.VITE_CHATSERVICE_URL as string + "/v1/chat/message";
 
 const props = defineProps({
   senderId: {
