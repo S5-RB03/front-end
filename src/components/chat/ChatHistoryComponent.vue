@@ -21,7 +21,8 @@
   <script lang="ts">
   import { defineComponent, ref, onMounted, watch } from "vue";
   import type { Message } from "@/interfaces/Message";
-  
+  import getEnvironmentVariable from '../../../env';
+
   export default defineComponent({
     name: "ChatHistory",
     props: {
@@ -46,7 +47,7 @@
       const chatMessages = ref<Message[]>([]);
   
       async function fetchMessages() {
-        const apiUrl = import.meta.env.VITE_CHATSERVICE_URL as String + `/v1/chat/message?senderId=${props.senderId}&receiverId=${props.receiverId}&page=${props.page}&pageSize=${props.pageSize}`;
+        const apiUrl = getEnvironmentVariable('VITE_CHATSERVICE_URL') as string + `/v1/chat/message?senderId=${props.senderId}&receiverId=${props.receiverId}&page=${props.page}&pageSize=${props.pageSize}`;
         try {
           const response = await fetch(apiUrl);
           if (response.ok) {

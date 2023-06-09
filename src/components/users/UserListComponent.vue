@@ -17,6 +17,7 @@
 import { onMounted, ref } from 'vue';
 import { useReceiverStore } from '@/stores/receiverStore';
 import router from '@/router';
+import getEnvironmentVariable from '../../../env';
 
 const receiverStore = useReceiverStore();
 
@@ -40,7 +41,7 @@ const retryTimer = ref(5);
 const fetchData = async () => {
     isLoading.value = true;
     try {
-        const response = await fetch(import.meta.env.VITE_USERSERVICE_URL as String + '/v1/users/uuids');
+        const response = await fetch(getEnvironmentVariable('VITE_USERSERVICE_URL') as String + '/v1/users/uuids');
         if(response.ok){
             const jsonResponse = await response.json();
             users.value = jsonResponse;
