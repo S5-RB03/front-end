@@ -1,6 +1,6 @@
 // src/plugins/keycloak.ts
 import type { App } from 'vue';
-import keycloak from '../keycloak';
+import keycloak from '@/keycloak';
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
