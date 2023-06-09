@@ -22,9 +22,9 @@ app.use(keycloakPlugin);
 import { useKeycloakStore } from '@/stores/keycloakStore';
 const store = useKeycloakStore();
 
-console.log('VITE_KEYCLOAK_URL', import.meta.env.VITE_KEYCLOAK_URL);
-console.log('VITE_USERSERVICE_URL', import.meta.env.VITE_USERSERVICE_URL);
-console.log('VITE_CHATSERVICE_URL', import.meta.env.VITE_CHATSERVICE_URL);
+console.log('VITE_KEYCLOAK_URL', window.env.VITE_KEYCLOAK_URL);
+console.log('VITE_USERSERVICE_URL', window.env.VITE_USERSERVICE_URL);
+console.log('VITE_CHATSERVICE_URL', window.env.VITE_CHATSERVICE_URL);
 
 app.mount('#app');
 
