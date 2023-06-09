@@ -1,11 +1,10 @@
-// HeaderComponent.vue
 <script setup lang="ts">
 import { useKeycloakStore } from '@/stores/keycloakStore';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 const store = useKeycloakStore();
-const keycloakError = ref(store.getKeycloakError);
-const keycloakLoading = ref(store.getKeycloakLoading);
+const keycloakError = computed(() => store.getKeycloakError);
+const keycloakLoading = computed(() => store.getKeycloakLoading);
 const keycloak = ref(store.getKeycloak);
 
 const login = () => {

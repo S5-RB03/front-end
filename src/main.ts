@@ -26,10 +26,11 @@ app.mount('#app');
 
 store.setKeycloakLoading(true);
 store.keycloak.init({}).then((authenticated) => {
-  console.log('Keycloak initialized', authenticated);
+  console.log('Keycloak authenticated', authenticated);
   store.setKeycloakLoading(false);
-}).catch(() => {
-  console.log('Keycloak initialization error');
+  console.log('keycloak loading', store.getKeycloakLoading);
+}).catch((error) => {
+  console.log('Keycloak initialization error', error);
   store.setKeycloakError(true);
   store.setKeycloakLoading(false);
 });
