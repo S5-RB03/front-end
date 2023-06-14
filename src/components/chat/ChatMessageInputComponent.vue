@@ -4,6 +4,7 @@ import { ref } from "vue";
 import type { Message } from "../../interfaces/Message";
 import { MessageType } from "@/interfaces/Message";
 import { defineProps } from 'vue'
+import CryptoJS from 'crypto-js';
 
 const apiUrl = getEnvironmentVariable('VITE_CHATSERVICE_URL') as string + "/v1/chat/message";
 
@@ -25,9 +26,13 @@ async function sendMessage() {
 
   const messageId = `${props.senderId}-${new Date().toISOString()}-${Math.random().toString(36).substring(2)}`
 
+  let secretKey = "E2EE";
+
+  let encryptedMessage = CryptoJS.AES.encrypt(messageText.value, secretKey).toString();
+
   const messageData: Message = {
     id: messageId,
-    textContent: messageText.value,
+    textContent: encryptedMessage,
     senderId: props.senderId,
     receiverId: props.receiverId,
     messageType: MessageType.TEXT,
